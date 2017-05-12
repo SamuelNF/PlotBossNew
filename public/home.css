@@ -7,13 +7,6 @@ body{
    margin: 0;
 }
 
-#bar{
-   background-color: #4b4b4b;
-   color: white;
-   height: 80px;
-   margin-bottom: 20px;
-}
-
 #box{
    width: 95%;
    height: 600px;
