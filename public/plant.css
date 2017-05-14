@@ -28,4 +28,33 @@ body{
 a {
    color: white;
 }
+.col{
+  float: left;
+}
+.col + .col{
+  float: left;
+  margin-left: 20px;
+}
+#table{
+   margin:30px;
+   margin-top: 80px;
+   float:left;
+   font-family: 'Ubuntu', cursive;
+} 
+/*Whole table*/
+table{
+   margin: 2%;
+   width: 96%;
+}
+
+/*Cells*/
+th,td {
+border-collapse: collapse;
+   border: 0px solid black;
+   padding: 0.1rem;
+}
+
+td {
+   padding:0rem;
+}
 

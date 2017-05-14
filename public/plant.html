@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="plant.css"></link>
 <link rel="stylesheet" href="nav.css"></link>
 <script type="text/javascript" src = nav.js> </script>
+<script type="text/javascript" src = planttable.js> </script>
 
 <head>
 <title>PlotBoss - Plant View</title>
@@ -18,13 +19,58 @@ type="text/css"></link>
 <script type="text/javascript"> addNavBar() </script>
 
 <div id="box">
-   <div id="message">
-   <h1>{{name}}</h1>
-   <p>{{location}}</p>
-   <p>{{planting}}</p>
-   <p>{{harvesting}}</p>
+   <div class="col">
+      <div id="message">
+      <h1>{{name}}</h1>
+
+      <h3>Where to grow</h3>
+      <p>{{location}}</p>
+      <h3>Planting Tips</h3>
+      <p>{{planting}}</p>
+      <h3>Havesting Tips</h3>
+      <p>{{harvesting}}</p>
+      </div>
+   </div>
+   <div class="col">
+      <table id="table">
+      <thead>
+         <tr>
+            <th style="background-color: #4b4b4b;"> </th>
+            <th>   </th>
+            <th>Jan</th>
+            <th>Feb</th>
+            <th>Mar</th>
+            <th>Apr</th>
+            <th>May</th>
+            <th>Jun</th>
+            <th>Jul</th>
+            <th>Aug</th>
+            <th>Sep</th>
+            <th>Oct</th>
+            <th>Nov</th>
+            <th>Dec</th>
+         </tr>
+      </thead>
+   <tbody>
+   </tbody>
+</table>
    </div>
 </div>
 </body>
+
+<script type="text/javascript"> pad() </script>
+
+<ul class="plantMonths">
+   {{#each plantlist}}
+    <script type="text/javascript"> fill({{plantMonth}}, 1) </script>
+   {{/each}}
+</ul>
+
+<ul class="harvestMonths">
+   {{#each harvestlist}}
+    <script type="text/javascript"> fill({{harvestMonth}}, 2) </script>
+   {{/each}}
+</ul>
+
 
 </html>

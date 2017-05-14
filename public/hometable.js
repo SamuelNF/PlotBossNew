@@ -2,16 +2,28 @@ function fill(crop, bed, plant, harvest, harvesting, name, planting, colour)
 {
    var table = document.getElementById("table");
    var length = harvest-plant+1;
-   console.log("Adding plant at "+bed+plant);
+   console.log("Adding "+name+" at "+bed+plant);
+   var columns = 0;
+   for(i = 0; columns < plant; i++)
+   {
+      columns = columns + table.rows[bed+1].cells[i].colSpan;
+      console.log(i+" : "+columns);
+   }
 
-   var cell = table.rows[bed+1].cells[plant];
+   var cell = table.rows[bed+1].cells[i];
+   console.log("Adding "+name+" at "+bed+i);
    cell.style.backgroundColor=colour;
    cell.setAttribute('colspan', length.toString());
    cell.innerHTML = '<button onclick="info('+crop+',\''+name+'\',\''+planting+'\',\''+harvesting+'\')"></button>';
 
-   
+   for(i = 0; i < harvest-plant; i++)
+   {
+      table.rows[bed+1].deleteCell(harvest+1);
+      console.log("Deleting "+bed+":"+harvest);
+   } 
 
-/*  
+   //Old mode of drawing table
+/*
    for(i=plant; i<= harvest; i++)
    {
       var cell = table.rows[bed+1].cells[i];

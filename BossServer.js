@@ -113,7 +113,8 @@ function home(response,id)
    +"   FROM Bed b "
    +"   WHERE b.owner = ? "
    +") c "
-   +"ON d.bedID = c.bedID");
+   +"ON d.bedID = c.bedID "
+   +"ORDER BY plant ASC");
 
    db.serialize(function()
    {
@@ -158,16 +159,42 @@ function home(response,id)
 // Injects Plant data from database into template and delivers page
 function plant(response, id)
 {
+   var plantList = [];
+   var harvestList = [];
    var source = fs.readFileSync("public/plant.html", "utf8");
    var template = bar.compile(source);
-   var stmt = ("SELECT * FROM Crop WHERE id = ?");
-   db.get(stmt, id, function(err,row)
+   db.serialize(function()
    {
-      var html = template({name: row.name, planting: row.planting,
-                 location: row.location, harvesting: row.harvesting});
-      response.writeHead(200,{ 'Content-Type': 'text/html' });
-      response.write(html);
-      response.end();
+      var stmtPlant = ("SELECT * FROM Planted WHERE crop = ?");
+      db.all(stmtPlant, id, function(err,rows)
+      {
+         rows.forEach(function (row)
+         {
+            var temp = {plantMonth: row.month};
+            plantList.push(temp);
+         });
+      });
+
+      var stmtHarvest = ("SELECT * FROM Harvested WHERE crop = ?");
+      db.all(stmtHarvest, id, function(err,rows)
+      {
+         rows.forEach(function (row)
+         {
+            var temp = {harvestMonth : row.month};
+            harvestList.push(temp);
+         });
+      });
+
+      var stmtCrop = ("SELECT * FROM Crop WHERE id = ?");
+      db.get(stmtCrop, id, function(err,row)
+      {
+         var html = template({name: row.name, plant: row.plant, harvest: row.harvest,
+                    planting: row.planting, location: row.location,
+                    harvesting: row.harvesting, plantlist: plantList, harvestlist: harvestList});
+         response.writeHead(200,{ 'Content-Type': 'text/html' });
+         response.write(html);
+         response.end();
+      });
    });
 }
 

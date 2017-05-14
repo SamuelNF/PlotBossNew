@@ -170,3 +170,4 @@ INSERT INTO PlotCrop (bed, crop, plant, harvest) VALUES (2,3,6,11);
 INSERT INTO PlotCrop (bed, crop, plant, harvest) VALUES (4,4,6,9);
 INSERT INTO PlotCrop (bed, crop, plant, harvest) VALUES (4,5,1,4);
 INSERT INTO PlotCrop (bed, crop, plant, harvest) VALUES (5,5,7,9);
+INSERT INTO PlotCrop (bed, crop, plant, harvest) VALUES (5,5,10,12);
