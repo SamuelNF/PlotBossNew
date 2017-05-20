@@ -67,9 +67,12 @@ function handle(request, response)
    // if a template page is requested
    else if (template != null)
    {
-      if(template=="/plant") plant(response, id);
-      if(template=="/plantindex") plantIndex(response);
-      if(template=="/home") home(response, id);
+      if(template=="/register") register(response);
+      else if(template=="/register_attempt") registerAttempt(request, response);
+      else if(template=="/plant") plant(response, id);
+      else if(template=="/plantindex") plantIndex(response);
+      else if(template=="/home") home(response, id);
+      else console.log("Template not found: "+template);
    }
 
    // if all else fails
@@ -77,6 +80,58 @@ function handle(request, response)
    {
       fail(response, Error, "URL invalid");
    }
+}
+
+function registerAttempt(request, response)
+{
+   console.log("Reading body...");
+   request.on('data', add);
+   request.on('end', end);
+   var body = "";
+   console.log("in post stuff.");
+   function add(chunk) {
+      body = body + chunk.toString();
+   }
+   function end() {
+      console.log("Body:", body);
+      if(body){
+         console.log("body exists");
+         home(response, 1);
+
+         var array = body.split("&");
+         var temp = array[0].split("=");
+         var username = temp[1];
+         temp = array[1].split("=");
+         var password = temp[1];
+         temp = array[2].split("=");
+         var password2 = temp[1];
+
+         //need to add checks that passwords match and fields aren't empty, username doen'st already exist
+         //if there is an error, reload the register page with an error message handlebarsed in
+         var stmt1 = ("SELECT COUNT(*) FROM Person WHERE username = ?;");
+         db.get(stmt1, username);
+         if(count != 0){
+            //error 
+         8}
+
+         // add to database
+         var stmt = ("INSERT INTO Person (username, password) VALUES (?,?);");
+         db.run(stmt, username, password);
+
+         //deliver page - take you to home page but logged in
+         console.log("username: " + username);
+         //home(response,username);
+         home(response,"1"); 
+
+      }
+   }
+}
+
+function register(response)
+{
+   var file = "public/register.html";
+   fs.readFile(file, ready);
+   function ready(err, content) { deliver(response, "html", err, content); }
 }
 
 function loginPage(response)
@@ -246,7 +301,7 @@ function deliver(response, type, err, content)
 {
    if (err) return fail(response, NotFound, "File not found");
    var typeHeader = { "Content-Type": type };
-   response.writeHead(OK, typeHeader);
+   response.writeHead(OK, typeHeader); 
    response.write(content);
    response.end();
 }
