@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="plant.css"></link>
+<link rel="stylesheet" href="nav.css"></link>
+<script type="text/javascript" src = nav.js> </script>
+
+<head>
+<title>PlotBoss - Plant View</title>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"
+type="text/css"></link>
+</head>
+
+<body>
+
+<!-- Nav bar insertion -->
+<nav id="bar"></nav>
+
+<script type="text/javascript"> addNavBar() </script>
+<div id="box">
+   <div id="message">
+      <h1>
+			<ul class="plant_list">
+			  {{#each plantlist}}
+				 <p><a href="{{url}}"> {{name}}</a></p>
+           {{/each}}
+			</ul>
+      </h1>
+   </div>
+</div>
+</body>
+
+</html>

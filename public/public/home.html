@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="home.css"></link>
+<link rel="stylesheet" href="nav.css"></link>
+<script type="text/javascript" src = hometable.js> </script>
+<script type="text/javascript" src = nav.js> </script>
+
+<head>
+<title>PlotBoss - Home</title>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css"></link>
+<link rel="import" href="nav.html">
+</head>
+
+<body>
+
+<!-- Nav bar insertion -->
+<nav id="bar"></nav>
+<script type="text/javascript"> addNavBar() </script>
+
+
+<div id="box">
+<table id="table">
+   <thead>
+      <tr>
+         <th style="background-color: #4b4b4b;"> </th>
+         <th colspan="12"> 2015 </th>
+         <th colspan="12"> 2016 </th>
+      </tr>
+      <tr>
+         <th style="background-color: #4b4b4b;"> </th>
+         <th>Jan</th>
+         <th>Feb</th>
+         <th>Mar</th>
+         <th>Apr</th>
+         <th>May</th>
+         <th>Jun</th>
+         <th>Jul</th>
+         <th>Aug</th>
+         <th>Sep</th>
+         <th>Oct</th>
+         <th>Nov</th>
+         <th>Dec</th>
+         <th>Jan</th>
+         <th>Feb</th>
+         <th>Mar</th>
+         <th>Apr</th>
+         <th>May</th>
+         <th>Jun</th>
+         <th>Jul</th>
+         <th>Aug</th>
+         <th>Sep</th>
+         <th>Oct</th>
+         <th>Nov</th>
+         <th>Dec</th>
+      </tr>
+   </thead>
+   <tbody>
+   </tbody>
+</table>
+
+<div id="message">
+<div id="info">
+<p></p>
+</div>
+</div>
+</div>
+
+</body>
+
+
+
+<ul class="bed_list">
+   {{#each bedlist}}
+    <script type="text/javascript"> pad("{{name}}") </script>
+   {{/each}}
+</ul>
+
+<ul class="crop_list">
+   {{#each croplist}}
+    <script type="text/javascript"> fill({{crop}},{{bed}},{{plant}},{{harvest}},"{{harvesting}}","{{name}}","{{planting}}","{{colour}}"); </script>
+   {{/each}}
+</ul>
+
+</html>
